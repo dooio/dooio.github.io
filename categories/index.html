@@ -346,6 +346,8 @@ queueMicrotask(() => {
   var mnum;
   var snum;
   var nowHour;
+  var t;
+  var a;
 
   // 计算并更新天数、小时数、分钟数和秒数
   function updateTime() {
@@ -368,6 +370,10 @@ queueMicrotask(() => {
     if (String(snum).length == 1) {
       snum = "0" + snum;
     }
+
+    // 每秒更新旅行者一号的当前距离地球距离（t）和天文单位（a）的值
+    t = Math.trunc(234e8 + (seconds * 17));
+    a = (t / 1496e5).toFixed(6);
   }
 
   // 更新网页中显示的网站运行时间
@@ -377,7 +383,7 @@ queueMicrotask(() => {
     let currentTimeHtml = "";
     if (nowHour < 18 && nowHour >= 9) {
       // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
-      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i><br> 旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div>`;
     } else {
       // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
       let img = document.querySelector("#workboard .workSituationImg");
@@ -385,7 +391,7 @@ queueMicrotask(() => {
       img.title = "下班了就该开开心心的玩耍，嘿嘿~";
       img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
 
-      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i><br> 旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div>`;
     }
 
     if (document.getElementById("runtimeTextTip")) {
